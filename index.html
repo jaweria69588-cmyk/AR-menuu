@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AR Restaurant Menu</title>
+  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aframe-ar@1.8.0/dist/aframe-ar.js"></script>
+  <style>
+    body { font-family: Arial; text-align: center; margin: 0; padding: 20px; background: #fff; }
+    button { padding: 12px 25px; margin: 10px; font-size: 18px; cursor: pointer; }
+    #arContainer { display: none; width: 100%; height: 100vh; margin: 0; }
+    img { width: 80px; margin-right: 10px; vertical-align: middle; }
+    .menu-item { display: flex; align-items: center; justify-content: center; margin-bottom: 15px; }
+  </style>
+</head>
+<body>
+
+<h1>🍽️ AR Restaurant Menu</h1>
+
+<div id="menu">
+  <div class="menu-item">
+    <img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png" alt="Burger">
+    <button onclick="showAR('https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Burger/glTF-Binary/Burger.glb')">
+      🍔 Zinger Burger - Rs 650
+    </button>
+  </div>
+
+  <div class="menu-item">
+    <img src="https://cdn-icons-png.flaticon.com/512/1404/1404945.png" alt="Pizza">
+    <button onclick="showAR('https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Pizza/glTF-Binary/Pizza.glb')">
+      🍕 Chicken Pizza - Rs 1200
+    </button>
+  </div>
+
+  <div class="menu-item">
+    <img src="https://cdn-icons-png.flaticon.com/512/1046/1046857.png" alt="Fries">
+    <button onclick="showAR('https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/CornellBox/glTF-Binary/CornellBox.glb')">
+      🍟 French Fries - Rs 350
+    </button>
+  </div>
+</div>
+
+<div id="arContainer">
+  <a-scene
+    vr-mode-ui="enabled: false"
+    embedded
+    arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
+    <a-entity id="foodModel" position="0 0 -1" scale="0.5 0.5 0.5"></a-entity>
+    <a-camera></a-camera>
+  </a-scene>
+  <button onclick="backMenu()" style="position:absolute;top:10px;left:10px;z-index:999;padding:10px;">⬅ Back</button>
+</div>
+
+<script>
+function showAR(modelUrl) {
+  document.getElementById('menu').style.display = 'none';
+  document.getElementById('arContainer').style.display = 'block';
+  document.getElementById('foodModel').setAttribute('gltf-model', modelUrl);
+}
+
+function backMenu() {
+  document.getElementById('arContainer').style.display = 'none';
+  document.getElementById('menu').style.display = 'block';
+}
+</script>
+
+</body>
+</html>
